@@ -1,2 +1,5 @@
 gitpush.sh
 node_modules/
+public/html/index.html
+public/html/sorting.html
+public/mdbootstrap/
