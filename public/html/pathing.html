@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="Visualizer, Coding, Algorithms">
+        <meta name="description" content="Visualizer of various algorithms. Includes sorting- and pathfinding algorithms">
+        <meta name="author" content="Tom Carnein">
+        <meta name="viewport" content="width=device-width, inition-scale=1, height=device-height">
+        <title>Pathfinding</title>
+
+        <!-- external stylesheets -->
+        <link rel="stylesheet" href="/public/mdbootstrap/css/mdb.min.css">
+
+        <!-- my stylesheets -->
+        <link rel="stylesheet" type="text/css" href="../css/general.css">
+        <link rel="stylesheet" type="text/css" href="../css/pathing.css">
+    </head>
+
+    <body id="my_cursor_style">
+
+        <div id="my_grid_container"></div>
+
+        <div id="my_dummy_sidebar">
+            <i onclick="hideSidebar(my_sidebar, my_dummy_sidebar)" class="fas fa-align-justify"></i>
+        </div>
+
+        <div id="my_sidebar">
+
+            <span id="my_sidebar_header">
+                Tom Carnein
+                <i id="my_sidebar_icon" onclick="hideSidebar(my_sidebar, my_dummy_sidebar)" class="fas fa-align-right"></i>
+            </span>
+
+            <li>
+                <a href="#">
+                    <i class="fas fa-home"></i>
+                    Homepage 
+                </a>
+            </li>
+
+            <li class="my_dropRIGHT_menu">
+                <div>
+                    <i class="fas fa-tools"></i>
+                    Projects
+                    <i style="margin-left: 80px;" class="fas fa-angle-right"></i>
+                </div>
+                <span class="my_dropRIGHT_content">
+                    <p style="border-radius: 0 10px 0 0;"><a href="http://127.0.0.1:5500/public/html/pathing.html" target="_blank">Pathing Algorithms</a></p>
+                    <p style="border-radius: 0 0 10px 0;"><a href="#">Coming Soon</a></p>    
+                </span>
+            </li>
+
+            <li>
+                <a href="#Contact">
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                </a>
+            </li>
+            
+        </div>
+
+        <span id="my_options_menu">
+            <div onclick="changeCursor(this)" id="option1">Set Start<i style="color: hsla(0, 100%, 50%, 0.753);" class="fas fa-square"></i></div>
+            <div onclick="changeCursor(this)" id="option2">Set Target<i style="color: hsl(120, 96%, 30%);" class="fas fa-square"></i></div>
+            <div onclick="changeCursor(this)" id="option3">Set Bomb<i class="fas fa-bomb"></i></div>
+            <div class="my_dropDOWN_menu" id="option4" onclick="changeCursor(this)">Algorithms
+                <i class="fas fa-chevron-down"></i>
+                <span class="my_dropDOWN_content">
+                    <p>Dijkstra</p>
+                    <p>Coming Soon</p>
+                    <p style="border-radius: 0 0 10px 10px;">Coming Soon</p>
+                </span>
+            </div>
+            <div onclick="changeCursor(this)" style="padding-top: 5px;" id="option5">Reset</div>
+            <div onclick="changeCursor(this)" style="padding-top: 5px;" id="option6">Start</div>
+        </span>
+
+        <!-- external scripts -->
+        <script type="text/javascript" src="/public/mdbootstrap/js/mdb.min.js"></script>
+        <script src="https://kit.fontawesome.com/01a92479e6.js" crossorigin="anonymous"></script>
+
+         <!-- my scripts -->
+        <script type="text/javascript" src="/public/ts_compiled/general.js"></script>
+        <script type="text/javascript" src="/public/ts_compiled/pathing.js"></script>
+        <script type="text/javascript" src="/public/ts_compiled/pathingAlgos.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,123 @@
+a, a:focus, a:active, a:visited, a:link{
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+#my_sidebar {
+    position: fixed;
+    display: block;
+    user-select: none;
+    min-height: 100vh;
+    width: 250px;
+    background-color: #252F3F;
+    margin-top: 0px;
+    text-decoration: none;
+}
+
+#my_dummy_sidebar {
+    position: fixed;
+    user-select: none;
+    min-height: 100vh;
+    width: 40px;
+    color: #E5E7EB;
+    background-color: #252F3F;
+    margin-top: 0px;
+    text-decoration: none;
+    display: none;
+    text-align: center;
+}
+
+#my_dummy_sidebar i {
+    font-size: 28px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#my_sidebar_header {
+    display: block !important;
+    color: #E5E7EB;
+    font-size: 28px;
+    padding: 0px 0 5px 10%;
+}
+
+#my_sidebar_icon {
+    margin-left: 24px;
+    cursor: pointer;
+}
+
+#my_sidebar li {
+    color: #E5E7EB;
+    position: relative;
+    font-size: 23px;
+    top: 0px;
+    display: block;
+    padding: 5px 0 5px 10%;
+}
+
+#my_sidebar li:hover {
+    background-color: #161E2E;
+}
+
+#my_sidebar li a, li div {
+    display: block;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* CSS CODE TO DISPLAY A DROPDOWN MENU */
+.my_dropDOWN_content {
+    display: none;
+    position: absolute;
+
+}
+
+.my_dropDOWN_content p {
+    background-color: #252F3F;
+    height: 40px;
+    width: 150px;
+    position: relative;
+    top: 5px;
+    padding-top: 5px;
+    margin: 0;
+    border-top: 1px solid black;
+}
+
+.my_dropDOWN_content p:hover {
+    background-color: #161E2E;
+}
+
+.my_dropDOWN_menu:hover .my_dropDOWN_content {
+    display: block;
+}
+
+/* CSS CODE TO DISPLAY A DROPRIGHT MENU */
+.my_dropRIGHT_content {
+    display: none;
+    position: absolute;
+    height: 100%;
+    left: 250px;
+    top: 0;
+}
+
+.my_dropRIGHT_content p {
+    background-color: #252F3F;
+    height: 100%;
+    margin: 0;
+    padding: 5px 0 0 10px;
+    width: 215px;
+    border-bottom: 1px solid black;
+}
+
+.my_dropRIGHT_content p:hover {
+    background-color: #161E2E;
+}
+
+.my_dropRIGHT_menu:hover .my_dropRIGHT_content {
+    display: block;
+}
+
