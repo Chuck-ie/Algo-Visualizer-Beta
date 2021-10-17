@@ -51,15 +51,15 @@ function changeCursor(option) {
     var body = document.getElementById("my_cursor_style");
     switch (option.id) {
         case "option1":
-            body.style.cursor = "url(https://chuckie-droid.de/square-red.png), pointer";
+            body.style.cursor = "url(https://chuckie-droid.de/icons/square-red.png), pointer";
             activCursor = "start";
             break;
         case "option2":
-            body.style.cursor = "url(https://chuckie-droid.de/square-green.png), pointer";
+            body.style.cursor = "url(https://chuckie-droid.de/icons/square-green.png), pointer";
             activCursor = "target";
             break;
         case "option3":
-            body.style.cursor = "url(https://chuckie-droid.de/bomb-solid.png), pointer";
+            body.style.cursor = "url(https://chuckie-droid.de/icons/bomb-solid.png), pointer";
             activCursor = "obstacle";
             break;
         case "option4":
