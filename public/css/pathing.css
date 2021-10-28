@@ -4,7 +4,7 @@ body {
 
 @keyframes visitedCell {
     from {background-color: black;}
-    to {background-color: #E6727A;}
+    to {background-color: rgb(0, 197, 255);}
 }
 
 @keyframes shortestPath {
@@ -20,31 +20,6 @@ body {
     display: block;
 }
 
-#my_options_menu div {
-    background-color: #252F3F;
-    position: fixed;
-    width: 150px;
-    height: 40px;
-    top: 0;
-    text-align: center;
-    color: #E5E7EB;
-    vertical-align: bottom;
-    font-size: 18px;
-    user-select: none;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-
-#my_options_menu div:hover {
-    background-color: #161E2E;
-    cursor: pointer;
-}
-
-#my_options_menu i {
-    margin-left: 10px;
-    padding-top: 10px;
-}
-
 .gridCell {
     position: fixed;
     height: 20px;
@@ -53,6 +28,3 @@ body {
     background-color: #E5E7EB;
     user-select: none;
 }
-
-
-

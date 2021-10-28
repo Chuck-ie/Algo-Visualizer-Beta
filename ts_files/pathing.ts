@@ -2,18 +2,18 @@ var resizeID:number;
 
 window.addEventListener("resize", function() {
     clearTimeout(resizeID);
-    resizeID = setTimeout(createGrid, 500);
+    resizeID = window.setTimeout(createGrid, 500);
 })
 
 window.addEventListener("load", function() {
     createGrid();
-    setMenuStyle();
-    setGlobals();
+    setPathingMenuStyle();
+    pathingGlobals();
 })
 
 function clearGrid() {
     let gridContainer:HTMLElement = document.getElementById("my_grid_container")!;
-    setGlobals();
+    pathingGlobals();
 
     while (gridContainer.children[0] !== undefined) {
         gridContainer.removeChild(gridContainer.firstChild!);
@@ -29,7 +29,7 @@ function createGrid() {
     let height:number = window.innerHeight;
 
     let rowCount:number = Math.ceil(height/20) - 3;
-    let cellsEachRow:number = Math.ceil(width/20) - 2;
+    let cellsEachRow:number = Math.ceil(width/20);
 
     for (let i = 0; i < rowCount; i++) {
 
@@ -42,26 +42,12 @@ function createGrid() {
 
             cell.id = `${(i*cellsEachRow) + j}`;
             cell.className = "gridCell";
-            cell.style.left = `${j * 20 + 40}px`;
+            cell.style.left = `${j * 20 + 20}px`;
             cell.style.top = `${i * 20 + 40}px`;
             row.appendChild(cell);
         }
         gridContainer.appendChild(row);
     }
-}
-
-function setMenuStyle() {
-    // any because HTMLCollection wont work with style
-    let menuOptions:any = document.getElementById("my_options_menu")!.children;
-    let optionsCount:number = menuOptions.length;
-
-    for (let i = 0; i < optionsCount; i++) {
-
-        menuOptions[i].style.left = `${300+i*150}px`
-    }
-
-    menuOptions[0].style.borderRadius = "0 0 0 10px";
-    menuOptions[optionsCount-1].style.borderRadius = "0 0 10px 0";
 }
 
 function changeCursor(option:HTMLElement) {
@@ -176,7 +162,7 @@ function markCell(x:number, y:number, iconName:string) {
         }
 
         // hsl color == green
-        cellAtCursor!.style.backgroundColor = "hsl(120, 96%, 30%)";
+        cellAtCursor!.style.backgroundColor = "hsla(120, 96%, 30%, 1)";
         targetCell = cellAtCursor;
     }
 }
@@ -213,7 +199,7 @@ function startAlgorithm() {
         startCell = allCells[parseInt(temp[0])];
         targetCell = allCells[parseInt(temp[1])];
         startCell!.style.backgroundColor = "hsla(0, 100%, 50%, 0.753)";
-        targetCell!.style.backgroundColor = "hsl(120, 96%, 30%)";
+        targetCell!.style.backgroundColor = "hsla(120, 96%, 30%, 0.753)";
 
         obstacleCells = temp[2];
         obstacleCells.forEach((obstacle:HTMLElement) => {
@@ -269,10 +255,52 @@ var targetCell:HTMLElement | undefined;
 var needsClearance:boolean;
 var colorizeID:number;
 
-function setGlobals() {
+function pathingGlobals() {
     startLocked = false;
     needsClearance = false;
     obstacleCells = [];
     startCell = undefined;
     targetCell = undefined;
 }
+
+function setPathingMenuStyle() {
+    // any because HTMLCollection wont work with style
+    let menuOptions:any = document.getElementById("my_options_menu")!.children;
+    let optionsCount:number = menuOptions.length;
+
+    for (let i = 0; i < optionsCount; i++) {
+
+        menuOptions[i].style.left = `${300+i*150}px`
+    }
+
+    menuOptions[0].style.borderRadius = "0 0 0 10px";
+    menuOptions[optionsCount-1].style.borderRadius = "0 0 10px 0";
+}
+
+function colorizeCell(cell:HTMLElement, i:number) {
+
+    if (cell == targetCell) { return; }
+
+    setTimeout(() => {
+        cell.style.backgroundColor = "rgb(0, 197, 255)";
+        cell.style.animationName = "visitedCell";
+        cell.style.animationDuration = "1.5s";
+    }, i * 5);
+}
+
+function markShortestPath(currNode:myNode, i:number, isStart:boolean=false) {
+
+    if (currNode.predecessorNode !== currNode) {
+        setTimeout(() => {
+            if (isStart === true) {
+                markShortestPath(currNode.predecessorNode!, 5);
+            } else {
+                currNode.actualCell.style.backgroundColor = "#AED173";
+                currNode.actualCell.style.animationName = "shortestPath";
+                currNode.actualCell.style.animationDuration = "1s";
+                markShortestPath(currNode.predecessorNode!, 5);
+            }
+        }, i * 5)
+    }
+}
+

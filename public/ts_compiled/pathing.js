@@ -2,16 +2,16 @@
 var resizeID;
 window.addEventListener("resize", function () {
     clearTimeout(resizeID);
-    resizeID = setTimeout(createGrid, 500);
+    resizeID = window.setTimeout(createGrid, 500);
 });
 window.addEventListener("load", function () {
     createGrid();
-    setMenuStyle();
-    setGlobals();
+    setPathingMenuStyle();
+    pathingGlobals();
 });
 function clearGrid() {
     var gridContainer = document.getElementById("my_grid_container");
-    setGlobals();
+    pathingGlobals();
     while (gridContainer.children[0] !== undefined) {
         gridContainer.removeChild(gridContainer.firstChild);
     }
@@ -22,7 +22,7 @@ function createGrid() {
     var width = window.innerWidth;
     var height = window.innerHeight;
     var rowCount = Math.ceil(height / 20) - 3;
-    var cellsEachRow = Math.ceil(width / 20) - 2;
+    var cellsEachRow = Math.ceil(width / 20);
     for (var i = 0; i < rowCount; i++) {
         var row = document.createElement("div");
         row.className = "gridRow";
@@ -30,22 +30,12 @@ function createGrid() {
             var cell = document.createElement("div");
             cell.id = "" + ((i * cellsEachRow) + j);
             cell.className = "gridCell";
-            cell.style.left = j * 20 + 40 + "px";
+            cell.style.left = j * 20 + 20 + "px";
             cell.style.top = i * 20 + 40 + "px";
             row.appendChild(cell);
         }
         gridContainer.appendChild(row);
     }
-}
-function setMenuStyle() {
-    // any because HTMLCollection wont work with style
-    var menuOptions = document.getElementById("my_options_menu").children;
-    var optionsCount = menuOptions.length;
-    for (var i = 0; i < optionsCount; i++) {
-        menuOptions[i].style.left = 300 + i * 150 + "px";
-    }
-    menuOptions[0].style.borderRadius = "0 0 0 10px";
-    menuOptions[optionsCount - 1].style.borderRadius = "0 0 10px 0";
 }
 function changeCursor(option) {
     var body = document.getElementById("my_cursor_style");
@@ -133,7 +123,7 @@ function markCell(x, y, iconName) {
             targetCell.style.backgroundColor = "#E5E7EB";
         }
         // hsl color == green
-        cellAtCursor.style.backgroundColor = "hsl(120, 96%, 30%)";
+        cellAtCursor.style.backgroundColor = "hsla(120, 96%, 30%, 1)";
         targetCell = cellAtCursor;
     }
 }
@@ -163,7 +153,7 @@ function startAlgorithm() {
         startCell = allCells_1[parseInt(temp[0])];
         targetCell = allCells_1[parseInt(temp[1])];
         startCell.style.backgroundColor = "hsla(0, 100%, 50%, 0.753)";
-        targetCell.style.backgroundColor = "hsl(120, 96%, 30%)";
+        targetCell.style.backgroundColor = "hsla(120, 96%, 30%, 0.753)";
         obstacleCells = temp[2];
         obstacleCells.forEach(function (obstacle) {
             var bombCell = addBombCell();
@@ -209,10 +199,46 @@ var startCell;
 var targetCell;
 var needsClearance;
 var colorizeID;
-function setGlobals() {
+function pathingGlobals() {
     startLocked = false;
     needsClearance = false;
     obstacleCells = [];
     startCell = undefined;
     targetCell = undefined;
+}
+function setPathingMenuStyle() {
+    // any because HTMLCollection wont work with style
+    var menuOptions = document.getElementById("my_options_menu").children;
+    var optionsCount = menuOptions.length;
+    for (var i = 0; i < optionsCount; i++) {
+        menuOptions[i].style.left = 300 + i * 150 + "px";
+    }
+    menuOptions[0].style.borderRadius = "0 0 0 10px";
+    menuOptions[optionsCount - 1].style.borderRadius = "0 0 10px 0";
+}
+function colorizeCell(cell, i) {
+    if (cell == targetCell) {
+        return;
+    }
+    setTimeout(function () {
+        cell.style.backgroundColor = "rgb(0, 197, 255)";
+        cell.style.animationName = "visitedCell";
+        cell.style.animationDuration = "1.5s";
+    }, i * 5);
+}
+function markShortestPath(currNode, i, isStart) {
+    if (isStart === void 0) { isStart = false; }
+    if (currNode.predecessorNode !== currNode) {
+        setTimeout(function () {
+            if (isStart === true) {
+                markShortestPath(currNode.predecessorNode, 5);
+            }
+            else {
+                currNode.actualCell.style.backgroundColor = "#AED173";
+                currNode.actualCell.style.animationName = "shortestPath";
+                currNode.actualCell.style.animationDuration = "1s";
+                markShortestPath(currNode.predecessorNode, 5);
+            }
+        }, i * 5);
+    }
 }

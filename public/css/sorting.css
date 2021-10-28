@@ -1,11 +1,19 @@
+body {
+    background-color: rgba(0, 197, 255, 0.5);
+}
 
 #my_sidebar { 
     display: none;
 }
 
-
 #my_dummy_sidebar {
     display: block;
 }
 
-
+.sortingElement {
+    position: fixed;
+    width: 15px;
+    border: 1px solid grey;
+    background-color: #E5E7EB;
+    user-select: none;
+}

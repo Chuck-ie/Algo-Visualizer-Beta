@@ -29,6 +29,7 @@ async function dijkstra(start:HTMLElement, target:HTMLElement) {
     let nextNodes:myNode[] = [startNode];
     let currNode:myNode = startNode;
     let iterator:number = 0;
+    visitedCells.push(start);
 
     while (nextNodes.length !== 0) {
 
@@ -38,8 +39,7 @@ async function dijkstra(start:HTMLElement, target:HTMLElement) {
         }
 
         nextNodes.shift();
-        // currNode.actualCell.style.backgroundColor = "red";
-        let currRowPos:number = parseInt(currNode.actualCell.id)/rowLength;
+        let currRowPos:number = parseInt(currNode.actualCell.id) / rowLength;
 
         neighbourPos.forEach((x:number) => {
             // if statement to check, if neighbourPos is out of array range
@@ -52,8 +52,8 @@ async function dijkstra(start:HTMLElement, target:HTMLElement) {
                 if (cell === neighbourCell) { isDuplicate = true };
             })
 
-            if (isDuplicate !== false) { return };
-            let neighbourRowPos:number = parseInt(neighbourCell.id)/rowLength;
+            if (isDuplicate) { return };
+            let neighbourRowPos:number = parseInt(neighbourCell.id) / rowLength;
             visitedCells.push(neighbourCell);
 
             // bunch of if statements to filter out unwanted neighbours
@@ -78,33 +78,7 @@ async function dijkstra(start:HTMLElement, target:HTMLElement) {
     }
 
     if (targetNode.predecessorNode !== undefined) {
-        markShortestPath(targetNode, iterator);
+        markShortestPath(targetNode, iterator, true);
     }
     startLocked = false;
 }
-
-function colorizeCell(cell:HTMLElement, i:number) {
-
-    setTimeout(() => {
-        cell.style.backgroundColor = "#E6727A";
-        cell.style.animationName = "visitedCell";
-        cell.style.animationDuration = "1.5s";
-    }, i * 10);
-}
-
-function markShortestPath(currNode:myNode, i:number) {
-
-    if (currNode.predecessorNode !== currNode) {
-        setTimeout(() => {
-            currNode.actualCell.style.backgroundColor = "#AED173";
-            currNode.actualCell.style.animationName = "shortestPath";
-            currNode.actualCell.style.animationDuration = "1s";
-            markShortestPath(currNode.predecessorNode!, 5);
-        }, i * 10)
-    }
-}
-
-function sleep(ms:number) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
-

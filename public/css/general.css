@@ -68,6 +68,32 @@ li {
     width: 100%;
     cursor: pointer;
 }
+/* Options Menu */
+#my_options_menu div {
+    background-color: #252F3F;
+    position: fixed;
+    width: 150px;
+    height: 40px;
+    top: 0;
+    text-align: center;
+    color: #E5E7EB;
+    vertical-align: bottom;
+    font-size: 18px;
+    user-select: none;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#my_options_menu div:hover {
+    background-color: #161E2E;
+    cursor: pointer;
+}
+
+#my_options_menu i {
+    margin-left: 10px;
+    padding-top: 10px;
+}
+
 
 /* CSS CODE TO DISPLAY A DROPDOWN MENU */
 .my_dropDOWN_content {
@@ -120,4 +146,3 @@ li {
 .my_dropRIGHT_menu:hover .my_dropRIGHT_content {
     display: block;
 }
-

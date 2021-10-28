@@ -35,78 +35,52 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var resizeID;
-window.addEventListener("resize", function () {
-    clearTimeout(resizeID);
-    resizeID = window.setTimeout(createPlayfield, 500);
-    setSortingMenuStyle();
-});
-window.addEventListener("load", function () {
-    setSortingMenuStyle();
-    sortingGlobals();
-    createPlayfield();
-});
-function clearPlayfield() {
-    var playfieldContainer = document.getElementById("my_sorting_container");
-    sortingGlobals();
-    while (playfieldContainer.children[0] !== undefined) {
-        playfieldContainer.removeChild(playfieldContainer.firstChild);
-    }
-}
-function createPlayfield() {
-    clearPlayfield();
-    var playfieldContainer = document.getElementById("my_sorting_container");
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    var elementCount = Math.floor((width - 500) / 15);
-    var heightDiff = Math.floor((height - 150) / elementCount);
-    var storedElements = new Array();
-    for (var i = 0; i < elementCount; i++) {
-        var newElement = document.createElement("div");
-        newElement.className = "sortingElement";
-        newElement.id = "" + i;
-        newElement.style.height = i * heightDiff + heightDiff + "px";
-        storedElements.push(newElement);
-    }
-    for (var j = elementCount; j > 0; j--) {
-        var randomIndex = Math.floor(Math.random() * j);
-        var randomElement = storedElements[randomIndex];
-        randomElement.style.left = j * 15 + 280 + "px";
-        storedElements.splice(randomIndex, 1);
-        playfieldContainer.appendChild(randomElement);
-    }
-}
-function setSortingMenuStyle() {
-    // any because HTMLCollection wont work with style
-    var menuOptions = document.getElementById("my_options_menu").children;
-    var optionsCount = menuOptions.length;
-    var width = window.innerWidth;
-    // let height:number = window.innerHeight;
-    for (var i = 0; i < optionsCount; i++) {
-        menuOptions[i].style.left = width - 150 + "px";
-        menuOptions[i].style.top = i * 40 + "px";
-    }
-}
-function colorizeElement(element, color, ms) {
+function selectionSort() {
     return __awaiter(this, void 0, void 0, function () {
+        var playfieldContainer, containerSize, i, currentElement, bestHeight, bestIndex, j, compareElement, compareHeight, currentHeight;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    element.style.backgroundColor = color;
-                    return [4 /*yield*/, sleep(ms)];
+                    playfieldContainer = document.getElementById("my_sorting_container");
+                    containerSize = playfieldContainer.childElementCount;
+                    i = containerSize - 1;
+                    _a.label = 1;
                 case 1:
+                    if (!(i >= 0)) return [3 /*break*/, 7];
+                    currentElement = playfieldContainer.children[i];
+                    bestHeight = Number(currentElement.clientHeight);
+                    bestIndex = i;
+                    colorizeElement(currentElement, "#FADA5E", 0);
+                    j = (i - 1);
+                    _a.label = 2;
+                case 2:
+                    if (!(j >= 0)) return [3 /*break*/, 5];
+                    compareElement = playfieldContainer.children[j];
+                    compareHeight = Number(compareElement.clientHeight);
+                    return [4 /*yield*/, colorizeElement(compareElement, "#E6727A", 20)];
+                case 3:
                     _a.sent();
-                    return [2 /*return*/];
+                    if (compareHeight < bestHeight) {
+                        bestHeight = compareHeight;
+                        bestIndex = j;
+                    }
+                    _a.label = 4;
+                case 4:
+                    j--;
+                    return [3 /*break*/, 2];
+                case 5:
+                    if (bestIndex != i) {
+                        currentHeight = currentElement.clientHeight;
+                        playfieldContainer.children[i].style.height = bestHeight + "px";
+                        playfieldContainer.children[bestIndex].style.height = currentHeight + "px";
+                    }
+                    resetColors(i);
+                    _a.label = 6;
+                case 6:
+                    i--;
+                    return [3 /*break*/, 1];
+                case 7: return [2 /*return*/];
             }
         });
     });
-}
-function resetColors(mainIteration) {
-    var playfieldContainer = document.getElementById("my_sorting_container");
-    playfieldContainer.children[mainIteration].style.backgroundColor = "hsla(120, 96%, 30%, 0.5)";
-    for (var i = mainIteration - 1; i >= 0; i--) {
-        playfieldContainer.children[i].style.backgroundColor = "#E5E7EB";
-    }
-}
-function sortingGlobals() {
 }

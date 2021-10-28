@@ -61,13 +61,13 @@ function dijkstra(start, target) {
             nextNodes = [startNode];
             currNode = startNode;
             iterator = 0;
+            visitedCells.push(start);
             _loop_1 = function () {
                 if (currNode.actualCell === target) {
                     targetNode.predecessorNode = currNode.predecessorNode;
                     return "break";
                 }
                 nextNodes.shift();
-                // currNode.actualCell.style.backgroundColor = "red";
                 var currRowPos = parseInt(currNode.actualCell.id) / rowLength;
                 neighbourPos.forEach(function (x) {
                     // if statement to check, if neighbourPos is out of array range
@@ -83,7 +83,7 @@ function dijkstra(start, target) {
                         }
                         ;
                     });
-                    if (isDuplicate !== false) {
+                    if (isDuplicate) {
                         return;
                     }
                     ;
@@ -120,30 +120,10 @@ function dijkstra(start, target) {
                     break;
             }
             if (targetNode.predecessorNode !== undefined) {
-                markShortestPath(targetNode, iterator);
+                markShortestPath(targetNode, iterator, true);
             }
             startLocked = false;
             return [2 /*return*/];
         });
     });
-}
-function colorizeCell(cell, i) {
-    setTimeout(function () {
-        cell.style.backgroundColor = "#E6727A";
-        cell.style.animationName = "visitedCell";
-        cell.style.animationDuration = "1.5s";
-    }, i * 10);
-}
-function markShortestPath(currNode, i) {
-    if (currNode.predecessorNode !== currNode) {
-        setTimeout(function () {
-            currNode.actualCell.style.backgroundColor = "#AED173";
-            currNode.actualCell.style.animationName = "shortestPath";
-            currNode.actualCell.style.animationDuration = "1s";
-            markShortestPath(currNode.predecessorNode, 5);
-        }, i * 10);
-    }
-}
-function sleep(ms) {
-    return new Promise(function (resolve) { return setTimeout(resolve, ms); });
 }

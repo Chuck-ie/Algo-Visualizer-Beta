@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="Visualizer, Coding, Algorithms">
+        <meta name="description" content="Visualizer of various algorithms. Includes sorting- and pathfinding algorithms">
+        <meta name="author" content="Tom Carnein">
+        <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height">
+        <title>Sorting</title>
+
+        <!-- external stylesheets -->
+        <link rel="stylesheet" href="/public/mdbootstrap/css/mdb.min.css">
+
+        <!-- my stylesheets -->
+        <link rel="stylesheet" type="text/css" href="../css/general.css">
+        <link rel="stylesheet" type="text/css" href="../css/sorting.css">
+        <!-- test -->
+
+    </head>
+
+    <body>
+        <div id="my_sorting_container"></div>
+
+        <div id="my_dummy_sidebar">
+            <i onclick="hideSidebar(my_sidebar, my_dummy_sidebar)" class="fas fa-align-justify"></i>
+        </div>
+
+        <div id="my_sidebar">
+
+            <span id="my_sidebar_header">
+                Tom Carnein
+                <i id="my_sidebar_icon" onclick="hideSidebar(my_sidebar, my_dummy_sidebar)" class="fas fa-align-right"></i>
+            </span>
+
+            <li>
+                <a href="127.0.0.1:5500/public/html/index.html">
+                    <i class="fas fa-home"></i>
+                    Homepage 
+                </a>
+            </li>
+
+            <li class="my_dropRIGHT_menu">
+                <div>
+                    <i class="fas fa-tools"></i>
+                    Projects
+                    <i style="margin-left: 80px;" class="fas fa-angle-right"></i>
+                </div>
+                <span class="my_dropRIGHT_content">
+                    <p style="border-radius: 0 10px 0 0;"><a href="http://127.0.0.1:5500/public/html/pathing.html">Pathing Algorithms</a></p>
+                    <p style="border-radius: 0 0 10px 0;"><a href="http://127.0.0.1:5500/public/html/sorting.html">Sorting Algorithms</a></p>    
+                </span>
+            </li>
+
+            <li>
+                <a href="#Contact">
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                </a>
+            </li>            
+        </div>
+
+
+        <div id="my_options_menu">
+            <div id="option1" style="padding-top: 5px;" onclick="selectionSort()">Start</div>
+            <div id="option2" style="padding-top: 5px;">Reset</div>
+            <div class="my_dropDOWN_menu" id="option3">Algorithms
+                <i class="fas fa-chevron-down"></i>
+                <span class="my_dropDOWN_content">
+                    <p>Selection Sort</p>
+                    <p>Quicksort</p>
+                    <p style="border-radius: 0 0 10px 10px;">Coming Soon</p>
+                </span>
+            </div>
+        </div>
+
+        <!-- external scripts -->
+        <script type="text/javascript" src="/public/mdbootstrap/js/mdb.min.js"></script>
+        <script src="https://kit.fontawesome.com/01a92479e6.js" crossorigin="anonymous"></script>
+
+        <!-- my scripts -->
+        <script type="text/javascript" src="/public/ts_compiled/general.js"></script>
+        <script type="text/javascript" src="/public/ts_compiled/sorting.js"></script>
+        <script type="text/javascript" src="/public/ts_compiled/sortingAlgos.js"></script>
+
+
+    </body>
+</html>
